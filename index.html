@@ -1,0 +1,515 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv='Content-Type' content='text/HTML; charset=utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <meta name='author' content='DSI MGEN - DIP.DSA.TSI.Outils'>
+        <title>Gestionnaire de transferts</title>
+        <link rel='shortcut icon' type='image/png' href='res/favicon.png'>
+        <script type="text/javascript" charset="UTF-8">
+            /* <![CDATA[ */
+            try {
+                if (undefined == xajax.config)
+                    xajax.config = {};
+            } catch (e) {
+                xajax = {};
+                xajax.config = {};
+            }
+            ;xajax.config.requestURI = "functions_XAJAX.php";
+            xajax.config.statusMessages = true;
+            xajax.config.waitCursor = true;
+            xajax.config.version = "xajax 0.5";
+            xajax.config.legacy = false;
+            xajax.config.defaultMode = "asynchronous";
+            xajax.config.defaultMethod = "POST";
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="lib/xajax_js/xajax_core.js" charset="UTF-8"></script>
+        <script type="text/javascript" charset="UTF-8">
+            /* <![CDATA[ */
+            window.setTimeout(function() {
+                var scriptExists = false;
+                try {
+                    if (xajax.isLoaded)
+                        scriptExists = true;
+                } catch (e) {}
+                if (!scriptExists) {
+                    alert("Error: the xajax Javascript component could not be included. Perhaps the URL is incorrect?\nURL: lib/xajax_js/xajax_core.js");
+                }
+            }, 2000);
+            /* ]]> */
+        </script>
+        <script type='text/javascript' charset='UTF-8'>
+            /* <![CDATA[ */
+            xajax_JX_get_dyn_tab = function() {
+                return xajax.request({
+                    xjxfun: 'JX_get_dyn_tab'
+                }, {
+                    parameters: arguments,
+                    mode: 'synchronous'
+                });
+            }
+            ;
+            xajax_JX_edit_contact = function() {
+                return xajax.request({
+                    xjxfun: 'JX_edit_contact'
+                }, {
+                    parameters: arguments,
+                    mode: 'synchronous'
+                });
+            }
+            ;
+            xajax_JX_show_histocom = function() {
+                return xajax.request({
+                    xjxfun: 'JX_show_histocom'
+                }, {
+                    parameters: arguments,
+                    mode: 'synchronous'
+                });
+            }
+            ;
+            xajax_JX_check_gens = function() {
+                return xajax.request({
+                    xjxfun: 'JX_check_gens'
+                }, {
+                    parameters: arguments
+                });
+            }
+            ;
+            xajax_JX_select_modele = function() {
+                return xajax.request({
+                    xjxfun: 'JX_select_modele'
+                }, {
+                    parameters: arguments,
+                    mode: 'synchronous'
+                });
+            }
+            ;
+            xajax_JX_show_com = function() {
+                return xajax.request({
+                    xjxfun: 'JX_show_com'
+                }, {
+                    parameters: arguments,
+                    mode: 'synchronous'
+                });
+            }
+            ;
+            xajax_JX_bic_module_choose = function() {
+                return xajax.request({
+                    xjxfun: 'JX_bic_module_choose'
+                }, {
+                    parameters: arguments
+                });
+            }
+            ;
+            xajax_JX_bic_module_result = function() {
+                return xajax.request({
+                    xjxfun: 'JX_bic_module_result'
+                }, {
+                    parameters: arguments
+                });
+            }
+            ;
+            xajax_JX_bic_upd_liste = function() {
+                return xajax.request({
+                    xjxfun: 'JX_bic_upd_liste'
+                }, {
+                    parameters: arguments
+                });
+            }
+            ;
+            xajax_JX_meteo_show_histo = function() {
+                return xajax.request({
+                    xjxfun: 'JX_meteo_show_histo'
+                }, {
+                    parameters: arguments
+                });
+            }
+            ;
+            xajax_JX_meteo_show_serveur = function() {
+                return xajax.request({
+                    xjxfun: 'JX_meteo_show_serveur'
+                }, {
+                    parameters: arguments
+                });
+            }
+            ;
+            /* ]]> */
+        </script>
+        <script src="https://kit.fontawesome.com/5031bce2af.js" crossorigin="anonymous"></script>
+        <script type='text/javascript' src='lib/jquery/jquery-3.6.0.min.js'></script>
+        <link type='text/css' rel='stylesheet' href='lib/jquery/jquery.growl.css'>
+        <script type='text/javascript' src='lib/jquery/jquery.growl.js'></script>
+        <link type='text/css' rel='stylesheet' href='./lib/jquery/jquery-clockpicker.min.css' media='screen'>
+        <script type='text/javascript' src='lib/jquery/jquery-clockpicker.min.js'></script>
+        <link type='text/css' rel='stylesheet' href='lib/bootstrap/css/bootstrap.min.css'>
+        <script type='text/javascript' src='lib/bootstrap/popper.min.js'></script>
+        <script type='text/javascript' src='lib/bootstrap/js/bootstrap.min.js'></script>
+        <link type='text/css' rel='stylesheet' href='lib/fontawesome/css/all.min.css' media='screen'>
+        <link type='text/css' rel='stylesheet' href='lib/bootstrap/css/bootstrap4-toggle.min.css'>
+        <script type='text/javascript' src='lib/bootstrap/js/bootstrap4-toggle.min.js'></script>
+        <link type='text/css' rel='stylesheet' href='lib/bootstrap/css/bootstrap-select.min.css'>
+        <script type='text/javascript' src='lib/bootstrap/js/bootstrap-select.min.js'></script>
+        <script type='text/javascript' src='lib/bootstrap/js/i18n/defaults-fr_FR.js'></script>
+        <script type='text/javascript' src='lib/jquery/jquery-ui-1.13.1/jquery-ui.min.js'></script>
+        <link type='text/css' rel='stylesheet' href='lib/jquery/jquery-ui-1.13.1/jquery-ui.min.css' media='screen'>
+        <link type='text/css' rel='stylesheet' href='lib/jquery/jquery-ui-1.13.1/jquery-ui.theme.min.css' media='screen'>
+        <link type='text/css' rel='stylesheet' href='lib/lib_ihm/ihm_css_base.css'>
+        <link type='text/css' rel='stylesheet' href='lib/lib_ihm/ihm_css_common.css'>
+        <link type='text/css' rel='stylesheet' href='lib/lib_ihm/ihm_css_dark.css'>
+        <script type='text/javascript' src='lib/lib_ihm/main.js'></script>
+    </head>
+    <body>
+        <header>
+            <div class='header-titre d-none d-lg-block'>Gestionnaire de transferts - Gestion de la cartographie des outils
+            de transferts (serveur)</div>
+            <div class='header-titre-small d-lg-none'>CTRF - Gestion de la cartographie des outils de transferts (serveur)
+        </div>
+            <div class='header-infos'>
+                <a href='#' onclick="popup_open('p_user');return false;" title='Consulter les infos utilisateur'>ZEZE Rodrigue (externe) (Transferts)</a>
+            </div>
+            <nav class='navbar navbar-expand-lg navbar-dark bg-dark fixed-top'>
+                <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#m_tg' aria-controls='m_tg' aria-expanded='false' aria-label='Toggle navigation'>
+                    <span class='navbar-toggler-icon'></span>
+                </button>
+                <a class='navbar-brand d-none d-lg-block' href='/ctrf' onclick="return(ihm_aff_debug(event));">
+                    <img alt='Logo' src='lib/lib_ihm/ihm_logo.png'>
+                </a>
+                <div class='collapse navbar-collapse text-secondary' id='m_tg'>
+                    <ul class='navbar-nav mr-auto'>
+                        <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                <i class="fa fa-home"></i>
+                                Flux de transfert
+                            </a>
+                            <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="dayTransfers('X',0)">
+                                    <i class='fa fa-search' aria-hidden='true' ></i>
+                                    &nbsp;&nbsp;Aujourd'hui (X)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="dayTransfers('X',1)">
+                                    <i class='fa fa-search' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Hier (X)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="dayTransfers('X',2)">
+                                    <i class='fa fa-search' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Avant-hier (X)
+                                </a>
+                                <div class='dropdown-divider'></div>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="dayTransfers('S',0)">
+                                    <i class='fa fa-search' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Ajourd'hui (S)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="dayTransfers('S',1)">
+                                    <i class='fa fa-search' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Hier (S)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="dayTransfers('S',2)">
+                                    <i class='fa fa-search' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Avant-Hier (S)
+                                </a>
+                                <!--<div class='dropdown-divider'></div><a class='dropdown-item'
+                                href="tbtrf_transferts_x.php"><i class='fa fa-search'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Historique des transferts (X)</a><a
+                                class='dropdown-item' href="tbtrf_transferts_s.php"><i class='fa fa-search'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Historique des transferts (S)</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item' href="tbref_user_pref.php"><i
+                                    class='fa fa-star' aria-hidden='true'></i>&nbsp;&nbsp;Mes éléments favoris</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item' href="tbref_user_routes.php"><i
+                                    class='fa fa-expand-arrows-alt' aria-hidden='true'></i>&nbsp;&nbsp;Routes des
+                                transferts</a><a class='dropdown-item' href="tbtrf_idf.php"><i class='fa fa-id-card'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Recensement des idf (actif/passif)</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item' href="tbref_conf_cft.php"><i
+                                    class='fa fa-sync-alt' aria-hidden='true'></i>&nbsp;&nbsp;Routages des serveurs
+                                CFT</a><a class='dropdown-item' href="tbref_conf_gtw.php"><i class='fa fa-people-carry'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Informations partenaires Gateway/CFT</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item' href="tbref_idf.php"><i
+                                    class='fa fa-thumbtack' aria-hidden='true'></i>&nbsp;&nbsp;Appartenance des IDF</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item'
+                                href="index.php?action=monitoring&env=x"><i class='fa fa-tachometer-alt'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Monitoring (X)</a><a class='dropdown-item'
+                                href="index.php?action=monitoring&env=s"><i class='fa fa-tachometer-alt'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Monitoring (S)</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item'
+                                href="index.php?action=ebics&env=x"><i class='fa fa-briefcase'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Ebics (X)</a><a class='dropdown-item'
+                                href="index.php?action=ebics&env=s"><i class='fa fa-briefcase'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Ebics (S)</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item' href="tbchk_exclusions.php"><i
+                                    class='fa fa-sitemap' aria-hidden='true'></i>&nbsp;&nbsp;Gestion des exclusions de
+                                transferts</a><a class='dropdown-item' href="tbchk_journal.php"><i class='fa fa-sitemap'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Historique des tickets de transferts KO</a>-->
+                            </div>
+                        </li>
+                        <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                <i class='fa fa-address-book'></i>
+                                Historique des transferts
+                            </a>
+                            <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="tr('X')">
+                                    <i class='fa fa-search' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Choix de la Période (X)
+                                </a>
+                                <div class='dropdown-divider'></div>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="tr('S')">
+                                    <i class='fa fa-search' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Choix de la Période (S)
+                                </a>
+                                <!--<div class='dropdown-divider'></div><a class='dropdown-item' href="tbann_partenaire.php"><i
+                                    class='fa fa-map-marker' aria-hidden='true'></i>&nbsp;&nbsp;Partenaires</a><a
+                                class='dropdown-item' href="tbann_contact.php"><i class='fa fa-user'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Contacts</a><a class='dropdown-item'
+                                href="tbann_typecontact.php"><i class='fa fa-tag'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Type de Contact</a><a class='dropdown-item'
+                                href="tbann_typepartenaire.php"><i class='fa fa-tags'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Type de Partenaire</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item' href="tbann_typesociete.php"><i
+                                    class='fa fa-bullseye' aria-hidden='true'></i>&nbsp;&nbsp;Type de Société</a><a
+                                class='dropdown-item' href="tbann_societemere.php"><i class='fa fa-flag'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Société Mère</a>
+                            <div class='dropdown-divider'></div><a class='dropdown-item' href="tbann_liaison.php"><i
+                                    class='fa fa-arrows-alt-h' aria-hidden='true'></i>&nbsp;&nbsp;Liaison</a><a
+                                class='dropdown-item' href="tbann_passerelle.php"><i class='fa fa-random'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Passerelle</a><a class='dropdown-item'
+                                href="tbann_protocole.php"><i class='fa fa-retweet'
+                                    aria-hidden='true'></i>&nbsp;&nbsp;Protocole</a>
+                        </div>-->
+                        </li>
+                        <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                <i class='fa fa-cloud-sun-rain'></i>
+                                Nuage des transferts
+                            </a>
+                            <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="trOk('X')">
+                                    <i class='fa fa-cloud' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Transferts OK (X)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="trKO('X')">
+                                    <i class='fa fa-cloud' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Transferts KO (X)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="trEnCours('X')">
+                                    <i class='fa fa-cloud' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Transferts en cours (X)
+                                </a>
+                                <div class='dropdown-divider'></div>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="trOk('S')">
+                                    <i class='fa fa-cloud' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Transferts OK (S)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="trKO('S')">
+                                    <i class='fa fa-cloud' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Transferts KO (S)
+                                </a>
+                                <a class='dropdown-item' href="javascript:void(0);" onclick="trEnCours('S')">
+                                    <i class='fa fa-cloud' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Transferts en cours (S)
+                                </a>
+                            </div>
+                        </li>
+                        <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                <i class='fa fa-envelope'></i>
+                                Echanges
+                            </a>
+                            <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                                <a class='dropdown-item' href="index.php?action=display_edit_modele">
+                                    <i class='fa fa-feather-alt' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Créer un modèle
+                                </a>
+                                <a class='dropdown-item' href="index.php?action=display_modelecom">
+                                    <i class='fa fa-tty' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Modèles de communication
+                                </a>
+                                <div class='dropdown-divider'></div>
+                                <a class='dropdown-item' href="index.php?action=display_newcom">
+                                    <i class='fa fa-edit' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Créer une communication
+                                </a>
+                                <a class='dropdown-item' href="index.php?action=display_validcom">
+                                    <i class='fa fa-envelope-square' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Communications en
+                                attente
+                                </a>
+                                <div class='dropdown-divider'></div>
+                                <a class='dropdown-item' href="index.php?action=display_histocom">
+                                    <i class='fa fa-mail-bulk' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Historique des communications
+                                </a>
+                            </div>
+                        </li>
+                        <li class='nav-item dropdown'>
+                            <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                <i class='fa fa-cog'></i>
+                                Configuration
+                            </a>
+                            <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                                <a class='dropdown-item' href="tbbic_modules.php">
+                                    <i class='fa fa-chess-king' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Modules
+                                </a>
+                                <a class='dropdown-item' href="tbbic_arguments.php">
+                                    <i class='fa fa-chess-knight' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Arguments
+                                </a>
+                                <a class='dropdown-item' href="tbbic_infos.php">
+                                    <i class='fa fa-chess-pawn' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Informations
+                                </a>
+                                <div class='dropdown-divider'></div>
+                                <a class='dropdown-item' href="tbadm_serveurs.php">
+                                    <i class='fa fa-sitemap' aria-hidden='true'></i>
+                                    &nbsp;&nbsp;Serveurs
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class='navbar-nav justify-content-end'>
+                        <li class='nav-item'>
+                            <a class='nav-link' href="javascript: affAide();" role='button' aria-haspopup='true' aria-expanded='false'>
+                                <i class='fa fa-question-circle'></i>
+                                <span id=''>Aide</span>
+                            </a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' href="index.php?action=logout" role='button' aria-haspopup='true' aria-expanded='false'>
+                                <i class='fa fa-power-off'></i>
+                                <span id=''>Déconnexion</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class='container-fluid'>
+            <link type='text/css' rel='stylesheet' href='lib/datatables/css/dataTables.bootstrap4.min.css' media='screen'>
+            <link type='text/css' rel='stylesheet' href='lib/datatables/css/buttons.dataTables.min.css' media='screen'>
+            <script type='text/javascript' src='lib/datatables/js/jquery.dataTables.min.js'></script>
+            <script type='text/javascript' src='lib/datatables/js/dataTables.bootstrap4.min.js'></script>
+            <script type='text/javascript' src='lib/datatables/js/dataTables.buttons.min.js'></script>
+            <script type='text/javascript' src='lib/datatables/js/buttons.html5.min.js'></script>
+            <script type='text/javascript' src='lib/datatables/js/jszip.min.js'></script>
+            <script type='text/javascript' src='lib/tinymce/tinymce.min.js'></script>
+            <script type='text/javascript' src='res/appli.js'></script>
+            <script type='text/javascript' src='lib/lib_pme/lib_pme.js'></script>
+            <form method="post" id="pme_table" enctype="multipart/form-data" action="tbadm_serveurs.php" name="pme_sys_form">
+                <input type="hidden" name="pme_sys_sfn[0]" value="1">
+                <input type="hidden" name="pme_sys_fl" value="0">
+                <input type="hidden" name="pme_sys_qfn" value="">
+                <input type="hidden" name="pme_sys_fm" value="0">
+                <table class='table table-striped table-hover table-condensed'>
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type='button' value='Recherche' class='btn btn-primary btn-sm search_filter' style='line-height:0.8;font-size:10pt;display:inline;' onclick='showSearch()'>
+                                <input type='submit' class='btn btn-primary btn-sm' style='line-height:0.8;font-size:10pt;display:none;' name='pme_sys_sw' value='Rech.'>
+                            </th>
+                            <th>
+                                <a class="pme-header" href="tbadm_serveurs.php?pme_sys_fm=0&amp;pme_sys_fl=0&amp;pme_sys_qfn=&amp;pme_sys_sfn[0]=0&amp;pme_sys_sfn[1]=1">ID</a>
+                            </th>
+                            <th>
+                                <a class="pme-header" href="tbadm_serveurs.php?pme_sys_fm=0&amp;pme_sys_fl=0&amp;pme_sys_qfn=&amp;pme_sys_sfn[0]=-1&amp;pme_sys_sfn[1]=1">Serveur</a>
+                            </th>
+                            <th>
+                                <a class="pme-header" href="tbadm_serveurs.php?pme_sys_fm=0&amp;pme_sys_fl=0&amp;pme_sys_qfn=&amp;pme_sys_sfn[0]=2&amp;pme_sys_sfn[1]=1">Environnement</a>
+                            </th>
+                            <th>
+                                <a class="pme-header" href="tbadm_serveurs.php?pme_sys_fm=0&amp;pme_sys_fl=0&amp;pme_sys_qfn=&amp;pme_sys_sfn[0]=3&amp;pme_sys_sfn[1]=1">Outil</a>
+                            </th>
+                            <th>
+                                <a class="pme-header" href="tbadm_serveurs.php?pme_sys_fm=0&amp;pme_sys_fl=0&amp;pme_sys_qfn=&amp;pme_sys_sfn[0]=3&amp;pme_sys_sfn[1]=1">Jour</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr class="pme-filter">
+                            <td style='display:none;' class='pme-filter search_filter' colspan='1'>
+                                <input type='submit' class='btn btn-primary btn-sm pme-query' name='pme_sys_filter' value='Requête'>
+                            </td>
+                            <td class="pme-filter">
+                                <select style='display:none;' id="id_pme_sys_qf0_comp" class="form-control search_filter" name="pme_sys_qf0_comp">
+                                    <option value="&lt;">&lt;</option>
+                                    <option value="&lt;=">&lt;=</option>
+                                    <option value="=" selected>=</option>
+                                    <option value="&gt;=">&gt;=</option>
+                                    <option value="&gt;">&gt;</option>
+                                </select>
+                                <input style='display:none;' class='pme-filter form-control search_filter' value='' type='number' name='pme_sys_qf0' style="width:100%;" maxlength="4" onkeypress='return pme_js_filter_handler(this.form, event);'>
+                            </td>
+                            <td class="pme-filter">
+                                <input style='display:none;' class='pme-filter form-control search_filter' value='' type='text' name='pme_sys_qf1' style="width:100%;" maxlength="64" onkeypress='return pme_js_filter_handler(this.form, event);'>
+                            </td>
+                            <td class="pme-filter">
+                                <input style='display:none;' class='pme-filter form-control search_filter' value='' type='text' name='pme_sys_qf2' style="width:100%;" maxlength="64" onkeypress='return pme_js_filter_handler(this.form, event);'>
+                            </td>
+                            <td class="pme-filter">
+                                <input style='display:none;' class='pme-filter form-control search_filter' value='' type='text' name='pme_sys_qf3' style="width:100%;" maxlength="64" onkeypress='return pme_js_filter_handler(this.form, event);'>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td colspan="1">
+                            <a class="pme-sortinfo" href="tbadm_serveurs.php?pme_sys_fl=0&amp;pme_sys_fm=0&amp;pme_sys_qfn=">RAZ</a>
+                        </td>
+                        <td colspan="4">Tri: Serveur croissant</td>
+                    </tr>
+                    <tbody id="data-container">
+                    </tbody>
+                </table>
+                <script  type="module" src="script.js"></script>
+                <img class='pme-cell--1 mr-2' src='lib/lib_pme/pme-arrow.png' style='margin-left:8px;margin-right:5px;'>
+                <input type='button' class='btn btn-secondary btn-sm mr-1' value='Tout cocher' href='Javascript:void(0)' onclick="ihm_check_all('pme_table', true);">
+                <input type='button' class='btn btn-secondary btn-sm mr-1' value='Tout décocher' href='Javascript:void(0) onclick="ihm_check_all(' pme_table ', false);"><input type=' submit ' class=' btn btn-warning btn-sm ' name=' pme_sys_multidelete ' value=' Supprimer ' title=' Supprimer la séléction ' onClick="if (confirm(' Supprimer les enregistrements sélectionnés ?')) { 	return true; } else { 	return false; }">
+            <div class=' form-group row '>
+                <div class=' offset-sm-6 col-sm-6 text-right '><input disabled type=' submit ' class=' pme-first btn btn-secondary btn-sm ' name=' pme_sys_disablednavop ' value='<<'>
+                    <input disabled type='submit ' class=' pme-prev btn btn-secondary btn-sm ' name=' pme_sys_disablednavop ' value='<'> Page <input type='number' class='pme-gotopn' name='pme_sys_navpndown' value='1' style='width:60px' maxlength='2' min='1' oneypress='return PE_filter_handler(this.form, event)'>
+                sur 1 <input disabled type='submit' class='pme-next btn btn-secondary btn-sm' name='pme_sys_disablednavop' value='>'>
+                <input disabled type='submit' class='pme-last btn btn-secondary btn-sm' name='pme_sys_disablednavop' value='>>'>
+                - 185 enregistrements 
+                <a onclick="affAide('../../lib/lib_pme/aide.htm');">
+                    <i class='fa fa-question-circle button-copy' aria-hidden='true'></i>
+                </a>
+                <br>
+                <br>
+                <a class='btn btn-secondary btn-sm mr-1 ' href='/ctrf/tbadm_serveurs.php'>Actualiser</a>
+                <input type='submit' class='btn btn-primary btn-sm pme-add' name='pme_sys_operation' value='Ajouter'>
+        </div>
+</div></form></div>
+<footer>
+    <span>Zeze Innovation</span>
+    &nbsp;&nbsp;-&nbsp;&nbsp;<a class='text-info' title='Envoyer un mail à DSI MGEN - DIP.DSA.TSI.Outils' href='mailto:webmaster@zeze-innovation.com'>Dashboard-Transfer</a>
+</footer>
+<div class='modal fade' tabindex='-1' role='dialog' id='p_user_wrapper' aria-labelledby='p_user_wrapper' aria-hidden='true'>
+    <div class='modal-dialog modal-lg' role='document'>
+        <div class='modal-content text-dark bg-light'>
+            <div class='modal-header' onclick='return(ihm_aff_debug(event));'>
+                <h1 class='modal-title'>Informations utilisateur</h1>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <i class='fa fa-times'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class='modal fade' tabindex='-1' role='dialog' id='p_aide_wrapper' aria-labelledby='p_aide_wrapper' aria-hidden='true'>
+        <div class='modal-dialog modal-lg' role='document'>
+            <div class='modal-content text-dark bg-light'>
+                <div class='modal-header' onclick='return(ihm_aff_debug(event));'>
+                    <h1 class='modal-title'>Aide</h1>
+                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                        <i class='fa fa-times'></i>
+                    </button>
+                </div>
+                <div class='modal-header text-debug'>Modal ID : p_aide</div>
+                <div class='modal-body' id='p_aide_content'>
+                    <div id='p_aide_content'></div>
+                </div>
+                <div class='modal-footer'>
+                    <input type='button' class='btn btn-secondary btn-sm' data-dismiss='modal' value='Fermer'>
+                </div>
+            </div>
+        </div>
+    </div>
+</body></html>
