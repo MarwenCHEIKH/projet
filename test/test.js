@@ -103,6 +103,7 @@ function renderTable(data) {
     dataContainer.appendChild(row);
   });
 }
+const SSHService = require("./SSHService");
 
 const serverConfigs = {
   uat: {
@@ -120,69 +121,32 @@ const serverConfigs = {
 };
 
 function dayTransfers(environment, daysAgo) {
+  const sshService = new SSHService();
+
   const selectedConfig = serverConfigs[environment];
   const dayNumber = getDayNumberOfYear() - daysAgo;
-  const transfers = [];
-  conn
-    .on("ready", function () {
-      console.log("Connected to the remote server via SSH");
 
-      // You can execute commands here
-      conn.exec(
-        `peldsp status_trans yday_inf ${dayNumber} yday_sup ${dayNumber}`,
-        function (err, stream) {
-          if (err) throw err;
-          stream
-            .on("data", function (data) {
-              console.log(data);
-              const lines = data.split("\n");
-
-              for (let i = 1; i < lines.length; i++) {
-                const line = lines[i].trim();
-                if (line) {
-                  const [
-                    number,
-                    site,
-                    type,
-                    d,
-                    day,
-                    protoId,
-                    appli,
-                    state,
-                    file,
-                    r,
-                    kBytes,
-                    sc,
-                    u,
-                  ] = line.split(/\s+/);
-
-                  const transfer = {
-                    Number: number,
-                    Site: site,
-                    Type: type,
-                    D: d,
-                    Day: day,
-                    Proto_Id: protoId,
-                    Appli: appli,
-                    State: state,
-                    File: file,
-                    R: r,
-                    KBytes: kBytes,
-                    Sc: sc,
-                    U: u,
-                  };
-
-                  transfers.push(transfer);
-                }
-              }
-            })
-            .on("exit", function (code) {
-              console.log("Exit code: " + code);
-              conn.end();
-              renderTable(transfers);
-            });
-        }
-      );
+  sshService
+    .connectToServer(selectedConfig)
+    .then(() => {
+      const command = `peldsp status_trans yday_inf ${dayNumber} yday_sup ${dayNumber}`;
+      return sshService.executeCommand(command);
     })
-    .connect(selectedConfig);
+    .then((result) => {
+      // Process the result
+      console.log(result);
+
+      // You can render the table here if needed
+
+      // Close the SSH connection
+      sshService.closeConnection();
+    })
+    .catch((err) => {
+      console.error("Error:", err);
+
+      // Close the SSH connection in case of an error
+      sshService.closeConnection();
+    });
 }
+
+dayTransfers("uat", 0);
